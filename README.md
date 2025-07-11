@@ -6,7 +6,7 @@ Una REST API simple para gestionar recetas de cocina, ingredientes, pasos y cate
 https://restapi-recipes-railway-production.up.railway.app
 
 ## 📷 Diagrama ER
-![Diagrama ER de App Recetas](images/Diagrama ER de App Recetas.png)
+![Diagrama ER de App Recetas]('images/Diagrama ER de App Recetas.png')
 
 ## 📚 Tecnologías utilizadas
 
