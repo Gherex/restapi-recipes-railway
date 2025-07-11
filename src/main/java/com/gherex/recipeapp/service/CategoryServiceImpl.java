@@ -2,6 +2,7 @@ package com.gherex.recipeapp.service;
 
 import com.gherex.recipeapp.dto.CategoryRequestDTO;
 import com.gherex.recipeapp.dto.CategoryResponseDTO;
+import com.gherex.recipeapp.dto.CategoryWithIdResponseDTO;
 import com.gherex.recipeapp.entity.Category;
 import com.gherex.recipeapp.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,9 +19,9 @@ public class CategoryServiceImpl implements CategoryService {
     private final CategoryRepository categoryRepository;
 
     @Override
-    public Set<CategoryResponseDTO> getAllCategories() {
+    public Set<CategoryWithIdResponseDTO> getAllCategories() {
         return categoryRepository.findAll().stream()
-                .map(this::mapToResponseDTO)
+                .map(this::mapToResponseWithIdDTO)
                 .collect(Collectors.toSet());
     }
 
@@ -30,10 +31,10 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public CategoryResponseDTO getCategoryById(Long id) {
+    public CategoryWithIdResponseDTO getCategoryById(Long id) {
         Category category = categoryRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("No se encontró la categoría con ID: " + id));
-        return mapToResponseDTO(category);
+        return mapToResponseWithIdDTO(category);
     }
 
     @Override
@@ -45,7 +46,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public CategoryResponseDTO createRecipe(CategoryRequestDTO categoryDTO) {
+    public CategoryResponseDTO createCategory(CategoryRequestDTO categoryDTO) {
         Category category = new Category();
         category.setName(categoryDTO.getName());
         return mapToResponseDTO(categoryRepository.save(category));
@@ -53,6 +54,13 @@ public class CategoryServiceImpl implements CategoryService {
 
     private CategoryResponseDTO mapToResponseDTO(Category category) {
         CategoryResponseDTO dto = new CategoryResponseDTO();
+        dto.setName(category.getName());
+        return dto;
+    }
+
+    private CategoryWithIdResponseDTO mapToResponseWithIdDTO(Category category) {
+        CategoryWithIdResponseDTO dto = new CategoryWithIdResponseDTO();
+        dto.setId(category.getId());
         dto.setName(category.getName());
         return dto;
     }

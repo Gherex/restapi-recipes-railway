@@ -1,6 +1,7 @@
 package com.gherex.recipeapp.service;
 
 import com.gherex.recipeapp.dto.IngredientResponseDTO;
+import com.gherex.recipeapp.dto.IngredientWithIdResponseDTO;
 import com.gherex.recipeapp.entity.Ingredient;
 import com.gherex.recipeapp.repository.IngredientRepository;
 import lombok.RequiredArgsConstructor;
@@ -16,17 +17,17 @@ public class IngredientServiceImpl implements IngredientService {
     private final IngredientRepository ingredientRepository;
 
     @Override
-    public Set<IngredientResponseDTO> getAllIngredients() {
+    public Set<IngredientWithIdResponseDTO> getAllIngredients() {
         return ingredientRepository.findAll().stream()
-                .map(this::mapToResponseDTO)
+                .map(this::mapToResponseWithIdDTO)
                 .collect(Collectors.toSet());
     }
 
     @Override
-    public IngredientResponseDTO getIngredientById(Long id) {
+    public IngredientWithIdResponseDTO getIngredientById(Long id) {
         Ingredient ingredient = ingredientRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("No se encontró el ingrediente con ID: " + id));
-        return mapToResponseDTO(ingredient);
+        return mapToResponseWithIdDTO(ingredient);
     }
 
     @Override
@@ -39,6 +40,13 @@ public class IngredientServiceImpl implements IngredientService {
 
     public IngredientResponseDTO mapToResponseDTO(Ingredient ingredient) {
         IngredientResponseDTO dto = new IngredientResponseDTO();
+        dto.setName(ingredient.getName());
+        return dto;
+    }
+
+    public IngredientWithIdResponseDTO mapToResponseWithIdDTO(Ingredient ingredient) {
+        IngredientWithIdResponseDTO dto = new IngredientWithIdResponseDTO();
+        dto.setId(ingredient.getId());
         dto.setName(ingredient.getName());
         return dto;
     }

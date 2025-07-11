@@ -1,13 +1,13 @@
 package com.gherex.recipeapp.service;
 
-import com.gherex.recipeapp.dto.IngredientResponseDTO;
+import com.gherex.recipeapp.dto.IngredientWithIdResponseDTO;
 
 import java.util.Set;
 
 public interface IngredientService {
-    Set<IngredientResponseDTO> getAllIngredients();
+    Set<IngredientWithIdResponseDTO> getAllIngredients();
 
-    IngredientResponseDTO getIngredientById(Long id);
+    IngredientWithIdResponseDTO getIngredientById(Long id);
 
     void deleteIngredient(Long id);
 }

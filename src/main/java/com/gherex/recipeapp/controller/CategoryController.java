@@ -1,9 +1,6 @@
 package com.gherex.recipeapp.controller;
 
-import com.gherex.recipeapp.dto.CategoryRequestDTO;
-import com.gherex.recipeapp.dto.CategoryResponseDTO;
-import com.gherex.recipeapp.dto.RecipeRequestDTO;
-import com.gherex.recipeapp.dto.RecipeResponseDTO;
+import com.gherex.recipeapp.dto.*;
 import com.gherex.recipeapp.service.CategoryService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -21,15 +18,15 @@ public class CategoryController {
     private final CategoryService categoryService;
 
     @GetMapping
-    public ResponseEntity<Set<CategoryResponseDTO>> getAllCategories() {
-        Set<CategoryResponseDTO> categories = categoryService.getAllCategories();
+    public ResponseEntity<Set<CategoryWithIdResponseDTO>> getAllCategories() {
+        Set<CategoryWithIdResponseDTO> categories = categoryService.getAllCategories();
         return ResponseEntity.ok(categories); // 200 OK
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getCategoryById(@PathVariable Long id) {
         try {
-            CategoryResponseDTO category = categoryService.getCategoryById(id);
+            CategoryWithIdResponseDTO category = categoryService.getCategoryById(id);
             return ResponseEntity.ok(category);
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage()); // 404
@@ -39,7 +36,7 @@ public class CategoryController {
     @PostMapping
     public ResponseEntity<?> postCategory(@RequestBody @Valid CategoryRequestDTO categoryDTO) {
         try {
-            CategoryResponseDTO created = categoryService.createRecipe(categoryDTO);
+            CategoryResponseDTO created = categoryService.createCategory(categoryDTO);
             return ResponseEntity.status(HttpStatus.CREATED).body(created); // 201 Created
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage()); // 400 Bad Request
