@@ -19,7 +19,7 @@
     <description>Recipe App with Spring and PostgreSQL</description>
 
     <properties>
-        <java.version>21</java.version>
+        <java.version>17</java.version>
     </properties>
 
     <dependencies>
@@ -71,7 +71,7 @@
 
     <build>
         <plugins>
-            <!-- Compiler plugin con versión y soporte para Lombok -->
+            <!-- Compiler plugin con soporte para Lombok -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
