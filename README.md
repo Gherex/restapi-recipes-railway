@@ -3,7 +3,7 @@
 Una REST API simple para gestionar recetas de cocina, ingredientes, pasos y categorías. Desarrollada con Java, Spring Boot, Hibernate y PostgreSQL.
 
 🚀 **Deploy en producción**:  
-https://restapi-recipes-railway-production.up.railway.app
+[ApiREST Recipes](https://restapi-recipes.up.railway.app/api/v1/recipes)
 
 ## 📷 Diagrama ER
 ![Diagrama ER de App Recetas](images/Diagrama_ER_de_App_Recetas.png)
